@@ -1,8 +1,12 @@
 const Footer = () => {
-    return <><div className="p-10 text-center">
-        Built by Abir 	&#40; @imabptweets 	&#41;<br/>
+  return (
+    <>
+      <div className="p-10 text-center">
+        Built by Abir &#40; @imabptweets &#41;
+        <br />
         using NextJS and Storyblok
-    </div></>
-
-}
+      </div>
+    </>
+  );
+};
 export default Footer;
