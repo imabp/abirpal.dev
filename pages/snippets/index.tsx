@@ -1,4 +1,8 @@
+import Layout from "../../src/components/Layout";
+
 const SnippetHome = () => {
-  return <>Index</>;
+  return <Layout title="snippets/">
+      Index
+    </Layout>;
 };
 export default SnippetHome;
