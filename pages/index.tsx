@@ -136,7 +136,7 @@ export async function getStaticProps({ preview = false }) {
   let slug = "home";
   // load the published content outside of the preview mode
   let sbParams = {
-    version: "draft", // or 'draft'
+        version:process.env.STORYBLOK_VERSION
   };
 
   if (preview) {

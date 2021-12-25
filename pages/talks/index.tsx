@@ -9,7 +9,7 @@ export default TalksHome;
 export async function getStaticProps(){
     let slug = 'talks'
     let sbParams = {
-        version:'published'
+        version:process.env.STORYBLOK_VERSION
     }
   let { data } = await Storyblok.get(`cdn/stories/${slug}`, sbParams);
   return {
