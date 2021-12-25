@@ -139,11 +139,6 @@ export async function getStaticProps({ preview = false }) {
         version:process.env.STORYBLOK_VERSION
   };
 
-  if (preview) {
-    // load the draft version inside of the preview mode
-    sbParams.version = "draft";
-    sbParams.cv = Date.now();
-  }
 
   let { data } = await Storyblok.get(`cdn/stories/${slug}`, sbParams);
   console.log(data);
