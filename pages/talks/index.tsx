@@ -1,21 +1,36 @@
+import { StoryData } from "storyblok-js-client";
 import Layout from "../../src/components/Layout";
 import Storyblok from "../../src/lib/storyblok";
 
-const TalksHome = ({story}:any) => {
-  return <Layout title="talks/">Index</Layout>;
+export type TalksProps={
+  stories:StoryData[];
+}
+
+const TalksHome = ({stories}:TalksProps) => {
+  return <Layout title="talks/">
+    {
+      stories && stories.map((story:any)=>{
+        return<> {story.slug} </>
+      })
+    }
+
+  </Layout>;
 };
+
 export default TalksHome;
 
 export async function getStaticProps(){
     let slug = 'talks'
+
     let sbParams = {
-        version:process.env.STORYBLOK_VERSION
+        "version":process.env.STORYBLOK_VERSION,
+        "starts_with": `${slug}/`
     }
-  let { data } = await Storyblok.get(`cdn/stories/${slug}`, sbParams);
+  let { data } = await Storyblok.get(`cdn/stories`, sbParams);
   return {
     props: {
-      story: data ? data.story : null,
+      stories: data ? data.stories as StoryData[] : null,
     },
-    revalidate: 10, // revalidate every 2 seconds
+    revalidate: 10, // revalidate every 10 seconds
   };
     }
