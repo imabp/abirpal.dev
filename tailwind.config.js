@@ -1,7 +1,12 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 const { spacing, fontFamily } = require("tailwindcss/defaultTheme");
 module.exports = {
-  content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}","./src/**/*.{js,jsx,ts,tsx}"],
+  mode: "jit",
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
   darkMode: false, // or 'media' or 'class'
   theme: {
     screens: {
@@ -37,14 +42,14 @@ module.exports = {
       fontFamily: {
         sans: ["IBM Plex Sans", ...fontFamily.sans],
       },
+      backgroundImage: {
+        "snippet-card": "url('/system/vectors/quadrantPrimary.svg')",
+        "layout-pattern":"url('/system/vectors/layoutPattern.svg')"
+      },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [
-    "postcss-import",
-    "tailwindcss",
-    "autoprefixer"
-  ]
+  plugins: ["postcss-import", "tailwindcss", "autoprefixer"],
 };

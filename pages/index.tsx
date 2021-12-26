@@ -7,13 +7,14 @@ import largeCircle from "./../public/assets/home/imabpImage.svg";
 import DynamicComponent from "../src/components/DynamicComponent";
 import RouteCard from "../src/components/homepage/routecard";
 import NavButton from "../src/components/mobile/navbutton";
+import Footer from "../src/components/Footer";
 
 const Home: NextPage = (storyobject: any) => {
   return (
     <>
       <Head>
         <title>Abir Pal - Developer, Writer, Creator</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.svg" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <div
@@ -96,7 +97,7 @@ const Home: NextPage = (storyobject: any) => {
           iphones:rounded-md
           iphones:block iphones:absolute iphones:bottom-2 iphones:right-2
           iphonex:rounded-md iphonex:block iphonex:absolute iphonex:bottom-2 iphonex:right-2
-          ipad:hidden ipadpro:hidden desktop:hidden
+          desktop:hidden
           "
           >
             <NavButton />
@@ -117,6 +118,8 @@ const Home: NextPage = (storyobject: any) => {
             overflow-x-auto
             iphones:hidden
             iphonex:hidden
+            ipad:hidden
+            ipadpro:hidden
             ipad:flex ipadpro:flex desktop:flex
        "
             >
@@ -127,6 +130,9 @@ const Home: NextPage = (storyobject: any) => {
             </div>
           </div>
         </div>
+        <div className="iphones:hidden iphonex:block ipad:block ipadpro:block desktop:block">
+          <Footer />
+        </div>
       </div>
     </>
   );
@@ -136,12 +142,10 @@ export async function getStaticProps({ preview = false }) {
   let slug = "home";
   // load the published content outside of the preview mode
   let sbParams = {
-        version:process.env.STORYBLOK_VERSION
+    version: process.env.STORYBLOK_VERSION,
   };
 
-
   let { data } = await Storyblok.get(`cdn/stories/${slug}`, sbParams);
-  console.log(data);
   return {
     props: {
       story: data ? data.story : null,

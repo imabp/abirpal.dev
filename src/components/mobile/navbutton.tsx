@@ -5,7 +5,7 @@ const NavButton = () => {
     <>
       <div
         className="
-h-24 w-24
+h-16 w-16
 bg-primary
 flex flex-col
 justify-center

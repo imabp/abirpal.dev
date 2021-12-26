@@ -1,8 +1,8 @@
 const Footer = () => {
   return (
     <>
-      <div className="p-10 text-center">
-        Built by Abir &#40; @imabptweets &#41;
+      <div className="w-full relative p-10 text-center bottom-0 translate-x-1/2  ">
+        Built by Abir
         <br />
         using NextJS and Storyblok
       </div>

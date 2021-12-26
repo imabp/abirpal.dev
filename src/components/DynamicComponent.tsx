@@ -20,10 +20,8 @@ type BlokType = {
 
 const DynamicComponent = (blokData: BlokType) => {
   // check if component is defined above
-  console.log("BLOKDATA", blokData);
   if (typeof Components[blokData.blok.component] !== undefined) {
     const Component = Components[blokData.blok.component];
-    console.log("blokdata.component->", blokData.blok.component);
     return <Component blok={blokData} key={blokData.blok._uid} />;
   }
 
