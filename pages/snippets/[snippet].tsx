@@ -22,7 +22,7 @@ api.getSnippets(window,snippet as string,uuid as string).then(
   <Layout title="snippets/" slug={snippet as string}>
     <div className="ml-5 mr-5">
 
-   <ReactMarkdown rehypePlugins={[rehypeHighlight]}  remarkPlugins={[gfm]} children={content}/>
+   <ReactMarkdown rehypePlugins={[rehypeHighlight]}  remarkPlugins={[gfm]}>{content}</ReactMarkdown>
     </div>
   </Layout>
   </>;
