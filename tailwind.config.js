@@ -1,7 +1,9 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 const { spacing, fontFamily } = require("tailwindcss/defaultTheme");
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
-  mode: "jit",
+  // mode: "jit",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",

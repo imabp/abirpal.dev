@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { GetServerSideProps, GetStaticPropsContext } from "next";
 import ReactMarkdown from 'react-markdown'
 import rehypeHighlight from 'rehype-highlight'
+import gfm from "remark-gfm";
 import * as api from './../../src/api'
 
 const Snippet = () => {
@@ -21,7 +22,7 @@ api.getSnippets(window,snippet as string,uuid as string).then(
   <Layout title="snippets/" slug={snippet as string}>
     <div className="ml-5 mr-5">
 
-   <ReactMarkdown rehypePlugins={[rehypeHighlight]}>{content}</ReactMarkdown>
+   <ReactMarkdown rehypePlugins={[rehypeHighlight]}  remarkPlugins={[gfm]} children={content}/>
     </div>
   </Layout>
   </>;

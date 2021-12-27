@@ -25,9 +25,8 @@ export default async function handler(
     else if (full_slug) {
       const sbParams = {
         version: process.env.STORYBLOK_VERSION,
-        starts_with: `${full_slug}/`,
       };
-      const response = await Storyblok.get(`cdn/stories/${full_slug}`, sbParams)
+      const response = await Storyblok.get(`cdn/stories/snippets/${full_slug}`, sbParams)
       return res.status(200).json({ snippet: response.data })
     }
     else throw new Error("NO SLUG");
