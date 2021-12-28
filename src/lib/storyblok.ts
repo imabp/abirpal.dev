@@ -27,7 +27,7 @@ export const getStory = async (
   uuid?: string,
   content?: string,
   slug?: string
-): Promise<getStoryResponse> => {
+):Promise<any> => {
   try {
     if (uuid) {
       const sbParams = {
