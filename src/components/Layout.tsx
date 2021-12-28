@@ -22,7 +22,7 @@ const Layout = ({ children, title, slug, bgPattern, footer }: LayoutProps) => {
     >
       <Head>
         <title>Abir Pal - Developer, Writer, Creator</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.svg" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <>
