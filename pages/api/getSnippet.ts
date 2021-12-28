@@ -17,7 +17,10 @@ export default async function handler(
       const response = await getStory(undefined, "snippets", full_slug);
       return res.status(200).json({ ...response.story });
     } else throw new Error("NO SLUG");
-  } catch (e) {
-    return res.status(500).json({ error: e });
+  } catch (err) {
+    if (err instanceof Error) {
+      console.log(err.message);
+      return res.status(500).json({ error: err.message });
+    }
   }
 }

@@ -45,8 +45,11 @@ export const getStory = async (
       const response = await Storyblok.get(`cdn/stories/${fullSlug}`, sbParams);
       return { ...response.data };
     } else throw new Error("NO SLUG or ID PRESENT");
-  } catch (e) {
-    return { story: null, error: e.message as string };
+  } catch (err) {
+    if (err instanceof Error) {
+      console.log(err.message);
+      return { story: null, error: err.message as string };
+    }
   }
 };
 
@@ -81,8 +84,10 @@ export const useStoryblok = (originalStory: StoryData, preview: boolean) => {
               setStory(data.story);
             }
           })
-          .catch((error) => {
-            console.log(error);
+          .catch((err) => {
+            if (err instanceof Error) {
+              console.log(err.message);
+            }
           });
       });
     }
