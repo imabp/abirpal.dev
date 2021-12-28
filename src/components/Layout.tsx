@@ -6,8 +6,8 @@ interface LayoutProps {
   children: React.ReactNode;
   title?: string;
   slug?: string;
-  bgPattern?: boolean
-  footer?: boolean | undefined
+  bgPattern?: boolean;
+  footer?: boolean | undefined;
 }
 
 const Layout = ({ children, title, slug, bgPattern, footer }: LayoutProps) => {
@@ -15,9 +15,11 @@ const Layout = ({ children, title, slug, bgPattern, footer }: LayoutProps) => {
     footer = true;
   }
   return (
-    <div className={`w-screen h-screen m-0 p-0
+    <div
+      className={`w-screen h-screen m-0 p-0
     ${bgPattern ? "bg-layout-pattern bg-repeat-x	 bg-bottom" : ""} 
-    `}>
+    `}
+    >
       <Head>
         <title>Abir Pal - Developer, Writer, Creator</title>
         <link rel="icon" href="/favicon.ico" />
@@ -48,13 +50,14 @@ const Layout = ({ children, title, slug, bgPattern, footer }: LayoutProps) => {
           >
             {slug ? slug : <p className="invisible">invisible_slug</p>}
           </p>
-          {title &&
-          <Image
-            src="/system/vectors/line.svg"
-            layout="responsive"
-            width="96vw"
-            height="2px"
-          />}
+          {title && (
+            <Image
+              src="/system/vectors/line.svg"
+              layout="responsive"
+              width="96vw"
+              height="2px"
+            />
+          )}
         </div>
       </>
       <main
@@ -65,7 +68,13 @@ const Layout = ({ children, title, slug, bgPattern, footer }: LayoutProps) => {
       >
         {children}
       </main>
-      {footer ? <><Footer /></> : <></>}
+      {footer ? (
+        <>
+          <Footer />
+        </>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

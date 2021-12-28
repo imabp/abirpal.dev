@@ -1,6 +1,7 @@
+const tailwindcss = require("tailwindcss");
 const defaultTheme = require("tailwindcss/defaultTheme");
 const { spacing, fontFamily } = require("tailwindcss/defaultTheme");
-const plugin = require('tailwindcss/plugin')
+const plugin = require("tailwindcss/plugin");
 
 module.exports = {
   // mode: "jit",
@@ -46,12 +47,17 @@ module.exports = {
       },
       backgroundImage: {
         "snippet-card": "url('/system/vectors/quadrantPrimary.svg')",
-        "layout-pattern":"url('/system/vectors/layoutPattern.svg')"
+        "layout-pattern": "url('/system/vectors/layoutPattern.svg')",
       },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: ["postcss-import", "tailwindcss", "autoprefixer"],
+  plugins: [
+    "postcss-import",
+    "tailwindcss",
+    "autoprefixer",
+    require("@tailwindcss/typography"),
+  ],
 };

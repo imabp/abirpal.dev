@@ -1,36 +1,43 @@
-import { useEffect, useState } from "react";
 import Layout from "../../src/components/Layout";
-import { useRouter } from 'next/router'
-import { GetServerSideProps, GetStaticPropsContext } from "next";
-import ReactMarkdown from 'react-markdown'
-import rehypeHighlight from 'rehype-highlight'
+import { GetServerSidePropsContext } from "next";
+import { serialize } from "next-mdx-remote/serialize";
+import ReactMarkdown from "react-markdown";
+import rehypeHighlight from "rehype-highlight";
 import gfm from "remark-gfm";
-import * as api from './../../src/api'
+import { getStory, getStoryResponse } from "../../src/lib/storyblok";
 
-const Snippet = () => {
- const router = useRouter();
- const {snippet,uuid} = router.query
- const [content,setContent] = useState("");
- useEffect(()=>{
-api.getSnippets(window,snippet as string,uuid as string).then(
-  (e)=>{
-    setContent(e.story.content.content)
-  }
-)
-},[])
-  return <>
-  <Layout title="snippets/" slug={snippet as string}>
-    <div className="ml-5 mr-5">
+interface SnippetPage {
+  mdx: string;
+  title: string;
+  date: string;
+}
 
-   <ReactMarkdown rehypePlugins={[rehypeHighlight]}  remarkPlugins={[gfm]}>{content}</ReactMarkdown>
-    </div>
-  </Layout>
-  </>;
+const Snippet = ({ mdx, title, date }: SnippetPage) => {
+  return (
+    <>
+      <Layout title="snippets/" slug={title as string}>
+        <div className="prose block mr-auto ml-auto iphones:mr-5 ipad:mr-auto ipadpro:mr-auto desktop:mr-auto">
+          <ReactMarkdown remarkPlugins={[gfm]}>{mdx}</ReactMarkdown>
+        </div>
+      </Layout>
+    </>
+  );
 };
 export default Snippet;
 
-export async function getServerSideProps(context:GetStaticPropsContext) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { story } = await getStory(
+    context.query.uuid as string,
+    "snippets",
+    context.query.snippet as string
+  );
+  const mdx = await story?.content.content;
   return {
-      props: {},
+    props: {
+      mdx: mdx,
+      title: story?.content.title,
+      date: story?.published_at,
+      slug: story?.slug,
+    },
   };
 }

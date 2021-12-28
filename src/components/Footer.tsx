@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <>
-      <div className="w-full relative p-10 text-center bottom-0 translate-x-1/2  ">
+      <div className="w-full relative p-10 text-center bottom-0   ">
         Built by Abir
         <br />
         using NextJS and Storyblok

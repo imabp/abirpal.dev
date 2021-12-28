@@ -18,6 +18,38 @@ const Storyblok = new StoryblokClient({
   },
 });
 
+export type getStoryResponse = {
+  story: StoryData | null;
+  error?: undefined | string;
+};
+
+export const getStory = async (
+  uuid?: string,
+  content?: string,
+  slug?: string
+): Promise<getStoryResponse> => {
+  try {
+    if (uuid) {
+      const sbParams = {
+        version: process.env.STORYBLOK_VERSION,
+        find_by: "uuid",
+      };
+
+      const response = await Storyblok.get(`cdn/stories/${uuid}`, sbParams);
+      return { ...response.data };
+    } else if (slug) {
+      const sbParams = {
+        version: process.env.STORYBLOK_VERSION,
+      };
+      const fullSlug = content ? `${content}/${slug}` : `${slug}`;
+      const response = await Storyblok.get(`cdn/stories/${fullSlug}`, sbParams);
+      return { ...response.data };
+    } else throw new Error("NO SLUG or ID PRESENT");
+  } catch (e) {
+    return { story: null, error: e.message as string };
+  }
+};
+
 export const useStoryblok = (originalStory: StoryData, preview: boolean) => {
   const [story, setStory] = useState(originalStory);
 
