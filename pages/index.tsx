@@ -8,7 +8,7 @@ import DynamicComponent from "../src/components/DynamicComponent";
 import RouteCard from "../src/components/homepage/routecard";
 import NavButton from "../src/components/mobile/navbutton";
 import Footer from "../src/components/Footer";
-
+import routesConfig from "../src/routes.config";
 const Home: NextPage = (storyobject: any) => {
   return (
     <>
@@ -123,10 +123,15 @@ const Home: NextPage = (storyobject: any) => {
             ipad:flex ipadpro:flex desktop:flex
        "
             >
-              <RouteCard title="About" route="/about" />
-              <RouteCard title="Snippets" route="/snippets" />
-              <RouteCard title="Guestbook" route="/guestbook" />
-              <RouteCard title="Talks and Shows" route="/talks" />
+              {routesConfig.routes.map((route) => {
+                return (
+                  <RouteCard
+                    title={route.title}
+                    route={route.route}
+                    key={route.route}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>
