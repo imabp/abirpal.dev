@@ -17,7 +17,6 @@ const About = ({ jobCards, langCards }: AboutPageProps) => {
       <Layout title="about" aboutpage={true}>
         <div className="flex justify-center">
           <div className=" w-full ">
-            {console.log(jobCards)}
             <div className="grid grid-cols-2 gap-4 w-full justify-center mb-5 ">
               <div className="pl-5 ">
                 <p className="text-fs24 text-left w-3/5 mx-auto">
@@ -28,6 +27,7 @@ const About = ({ jobCards, langCards }: AboutPageProps) => {
                 {jobCards.map((job) => {
                   return (
                     <Card
+                      key={job.company?.trim()}
                       title={job.title as string}
                       company={job.company as string}
                       type={job.type as "job" | "community"}
@@ -46,6 +46,7 @@ const About = ({ jobCards, langCards }: AboutPageProps) => {
               >
                 {langCards.map((lang) => (
                   <LangCard
+                    key={lang.name?.trim()}
                     name={lang.name}
                     bg={lang.bg}
                     fontMode={lang.fontMode}
@@ -97,7 +98,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         fontMode: el.fontMode,
       };
     });
-  console.log(langCards);
   return {
     props: {
       jobCards: jobCards,
