@@ -16,7 +16,7 @@ const LandscapeCard = ({ title, fullslug, uuid }: SnippetCardProps) => {
   return (
     <>
       <div
-        className={`${viewportClasses} ${backgroundImageClass} ipad:w-96 ipad:h-44  relative bg-secondary
+        className={`${viewportClasses} ${backgroundImageClass} ipad:w-96 ipad:h-44  relative bg-white
     iphones:w-64 iphones:h-36 iphonex:w-64 iphonex:h-36 
     rounded-md
     `}
@@ -24,7 +24,7 @@ const LandscapeCard = ({ title, fullslug, uuid }: SnippetCardProps) => {
         <p className="p-4">{title ? title : <>"lorem ipsum"</>}</p>
         <Link href={`/${fullslug}?uuid=${uuid}`} passHref>
           <p
-            className="m-4 mt-2 text-center text-secondary rounded-md bg-accent  text-fs18 p-1
+            className=" cursor-pointer m-4 mt-2 text-center text-secondary rounded-md bg-accent  text-fs18 p-1
                           iphones: w-2/3 iphonex:w-2/3 ipad:w-1/3
                           "
           >
@@ -40,7 +40,7 @@ const PortraitCard = ({ title, fullslug, uuid }: SnippetCardProps) => {
   return (
     <>
       <div
-        className={`${viewportClasses}  ${backgroundImageClass}  relative bg-secondary rounded-md bg-snippet-card
+        className={`${viewportClasses}  ${backgroundImageClass}  relative bg-white rounded-md bg-snippet-card
         iphones:w-44 iphones:h-56
         iphonex:w-44 iphonex:h-56
         ipad:w-56 ipad:h-64
