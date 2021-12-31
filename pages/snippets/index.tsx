@@ -1,6 +1,6 @@
 import Layout from "../../src/components/Layout";
 import SnippetDisplayCard from "../../src/containers/snippets/cards";
-import Storyblok from "../../src/lib/storyblok";
+import Storyblok, { getLinks } from "../../src/lib/storyblok";
 import { StoryData } from "storyblok-js-client";
 import { useRouter } from "next/router";
 
@@ -30,17 +30,11 @@ const SnippetHome = ({ snippets }: SnippetProps) => {
 export default SnippetHome;
 
 export async function getStaticProps() {
-  let slug = "snippets";
+  const stories = await getLinks("snippets");
 
-  let sbParams = {
-    version: process.env.STORYBLOK_VERSION,
-    starts_with: `${slug}/`,
-  };
-  let { data } = await Storyblok.get(`cdn/links/`, sbParams);
-  const stories = Object.entries(data.links);
   return {
     props: {
-      snippets: data ? stories : null,
+      snippets: stories,
     },
     revalidate: 10, // revalidate every 10 seconds
   };

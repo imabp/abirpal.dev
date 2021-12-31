@@ -1,5 +1,7 @@
 import Layout from "../src/components/Layout";
-
+import Image from "next/image";
+import Link from "next/link";
+import { home } from "../src/routes.config";
 const Guestbook = () => {
   return (
     <>
@@ -10,6 +12,15 @@ const Guestbook = () => {
               GuestBook
               <br />
               coming soon
+              <br />
+              <Link href={home.route} passHref>
+                <Image
+                  src="/system/vectors/home.svg"
+                  layout="fixed"
+                  height="24"
+                  width="24"
+                />
+              </Link>
             </p>
           </div>
         </div>
