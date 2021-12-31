@@ -23,11 +23,21 @@ export type getStoryResponse = {
   error?: undefined | string;
 };
 
+export const getLinks = async (slug?: string) => {
+  let sbParams = {
+    version: process.env.STORYBLOK_VERSION,
+    starts_with: `${slug}/`,
+  };
+  let { data } = await Storyblok.get(`cdn/links/`, sbParams);
+  const stories = Object.entries(data.links);
+  return data ? stories : null;
+};
+
 export const getStory = async (
   uuid?: string,
   content?: string,
   slug?: string
-):Promise<any> => {
+): Promise<any> => {
   try {
     if (uuid) {
       const sbParams = {
@@ -37,12 +47,18 @@ export const getStory = async (
 
       const response = await Storyblok.get(`cdn/stories/${uuid}`, sbParams);
       return { ...response.data };
-    } else if (slug) {
+    } else if (slug && content) {
       const sbParams = {
         version: process.env.STORYBLOK_VERSION,
       };
       const fullSlug = content ? `${content}/${slug}` : `${slug}`;
       const response = await Storyblok.get(`cdn/stories/${fullSlug}`, sbParams);
+      return { ...response.data };
+    } else if (slug && !content) {
+      const sbParams = {
+        version: process.env.STORYBLOK_VERSION,
+      };
+      const response = await Storyblok.get(`cdn/stories/${slug}`, sbParams);
       return { ...response.data };
     } else throw new Error("NO SLUG or ID PRESENT");
   } catch (err) {
