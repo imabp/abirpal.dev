@@ -37,6 +37,26 @@ const About = ({ jobCards, langCards }: AboutPageProps) => {
               </div>
             </div>
 
+            {/* IMPORTANT: DO NOT REMOVE THIS, AS TAILWIND PURGES THE UNUSED CLASSES . */}
+            {/* THESE CLASSES ARE SERVER SIDE, AND APPLIES DURING RUNTIME. */}
+
+            <div
+              className="hidden 
+            bg-lang-bg-golang
+            bg-lang-bg-java
+            bg-lang-bg-typescript
+            bg-lang-bg-aws
+            bg-lang-bg-reactjs
+            bg-lang-bg-nextjs
+            bg-lang-bg-tailwindcss
+            bg-lang-bg-detacloud
+            bg-lang-bg-cypress
+            bg-lang-bg-docker
+            bg-lang-bg-owasp
+            bg-lang-bg-terraform
+            "
+            />
+
             <div className="grid grid-cols-2 gap-4 w-full justify-center">
               <div
                 id="lang-cards"
@@ -44,11 +64,12 @@ const About = ({ jobCards, langCards }: AboutPageProps) => {
             grid grid-cols-3 gap-4 w-full justify-center
             "
               >
+                {console.log(langCards[0].bg)}
                 {langCards.map((lang) => (
                   <LangCard
                     key={lang.name?.trim()}
                     name={lang.name}
-                    bg={lang.bg}
+                    bg={`bg-${lang.bg as string}`}
                     fontMode={lang.fontMode}
                   />
                 ))}
@@ -63,7 +84,8 @@ const About = ({ jobCards, langCards }: AboutPageProps) => {
               text-fs16 text-left w-3/5 mt-5"
                 >
                   I feel solving problems and the purpose matters a lot! which
-                  eventually invents a new framework.
+                  eventually demystifies and leads on foundations for a
+                  framework.
                 </p>
               </div>
             </div>
@@ -94,13 +116,14 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     .map((el: any) => {
       return {
         name: el.name,
-        bg: `bg-lang-bg-${el.name.toLowerCase().trim()}`,
+        bg: `lang-bg-${el.name.toLowerCase().trim()}`,
         fontMode: el.fontMode,
       };
     });
   return {
     props: {
       jobCards: jobCards,
+
       langCards: langCards,
     },
   };
