@@ -24,37 +24,45 @@ const About = ({ jobCards, langCards }: AboutPageProps) => {
       <Layout title="about" aboutpage={true}>
         <div className="flex justify-center">
           <div className=" w-4/5 ">
-            <div className="
+            <div
+              className="
             iphones:grid iphones:grid-cols-1 iphones:gap-2 iphones:w-full
             iphonex:grid iphonex:grid-cols-1 iphonex:gap-2 iphonex:w-full
             ipad: grid ipad: grid-cols-1 ipad: gap-2 ipad:w-full
             ipadpro:grid ipadpro:grid-cols-2 ipadpro:gap-4 ipadpro:w-full ipadpro:justify-center ipadpro:mb-5 
             desktop:grid desktop:grid-cols-2 desktop:gap-4 desktop:w-full desktop:justify-center desktop:mb-5 
 
-            ">
+            "
+            >
               <div className="pl-5 ">
-                <p className="
+                <p
+                  className="
                 iphones:w-full iphonex:w-full ipad:w-3/5 ipadpro:w-4/5
                  text-left 
                 
-                 desktop:mx-auto">
-                   <p className="text-fs24">
+                 desktop:mx-auto"
+                >
+                  <p className="text-fs24">
+                    Wonderful experiences and workplaces I have been part of.
+                  </p>
 
-                  Wonderful experiences and workplaces I have been part of.
-                   </p>
-                
-                  <p className="p-3 mt-10 text-fs16
+                  <p
+                    className="p-3 mt-10 text-fs16
                    iphones:w-3/5 iphonex:w-3/5 ipad:w-2/5 ipadpro:w-4/5 desktop:w-2/5
                   flex justify-center cursor-pointer rounded-sm text-secondary bg-primary
-                  ">
-                  View Resume
+                  "
+                  >
+                    View Resume
                   </p>
                 </p>
               </div>
-              <div id="jobs" className="
+              <div
+                id="jobs"
+                className="
               iphones:w-full iphonex:w-full ipad:w-3/5 ipadpro:w-3/5 desktop:w-3/5
               w-3/5  
-              pl-3 ipadpro:mt-0  iphones:mt-5 iphonex:mt-5">
+              pl-3 ipadpro:mt-0  iphones:mt-5 iphonex:mt-5"
+              >
                 {jobCards.map((job) => {
                   return (
                     <Card

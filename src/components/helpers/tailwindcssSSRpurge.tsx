@@ -1,4 +1,5 @@
- const TailwindSSRPurge=()=><div
+const TailwindSSRPurge = () => (
+  <div
     className="hidden 
   bg-lang-bg-golang
   bg-lang-bg-java
@@ -14,4 +15,5 @@
   bg-lang-bg-terraform
   "
   />
-export default TailwindSSRPurge
+);
+export default TailwindSSRPurge;

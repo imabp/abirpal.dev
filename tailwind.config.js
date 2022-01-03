@@ -63,7 +63,7 @@ module.exports = {
         sans: ["IBM Plex Sans", ...fontFamily.sans],
       },
       backgroundImage: {
-        "wave-pattern":"url('/system/vectors/wave.svg')",
+        "wave-pattern": "url('/system/vectors/wave.svg')",
         "snippet-card": "url('/system/vectors/quadrantPrimary.svg')",
         "layout-pattern": "url('/system/vectors/layoutPattern.svg')",
       },

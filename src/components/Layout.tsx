@@ -38,7 +38,7 @@ const Layout = ({
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <>
-      <TailwindSSRPurge/>
+        <TailwindSSRPurge />
         <div
           id="header"
           className={` pt-8 mb-5 
