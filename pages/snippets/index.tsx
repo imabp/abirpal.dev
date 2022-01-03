@@ -16,6 +16,7 @@ const SnippetHome = ({ snippets }: SnippetProps) => {
         {snippets.map((snippet) => (
           <>
             <SnippetDisplayCard
+              key={snippet[0]}
               title={snippet[1].name}
               fullslug={snippet[1].slug}
               type="potrait"
@@ -36,6 +37,6 @@ export async function getStaticProps() {
     props: {
       snippets: stories,
     },
-    revalidate: 10, // revalidate every 10 seconds
+    revalidate: 21900, // check every 6 hours for new articles
   };
 }

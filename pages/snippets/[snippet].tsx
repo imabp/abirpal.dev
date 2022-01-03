@@ -37,6 +37,7 @@ const Snippet = ({ mdx, title, date, snippets }: SnippetPage) => {
           {snippets.map((snippet) => (
             <>
               <SnippetDisplayCard
+                key={snippet[0]}
                 title={snippet[1].name}
                 fullslug={snippet[1].slug}
                 type="landscape"
@@ -51,7 +52,7 @@ const Snippet = ({ mdx, title, date, snippets }: SnippetPage) => {
 };
 export default Snippet;
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
+export async function getStaticProps(context: GetServerSidePropsContext) {
   const { story } = await getStory(
     context.query.uuid as string,
     "snippets",
@@ -67,5 +68,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       slug: story?.slug,
       snippets: snippets,
     },
+    revalidate:30000 //Every 8 hours, check whether the markdown is updated.
   };
 }

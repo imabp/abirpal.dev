@@ -13,7 +13,7 @@ module.exports = {
       route: "/guestbook",
     },
     {
-      title: "Talks and Shows",
+      title: "Talks and Tweets",
       route: "/talks",
     },
   ],

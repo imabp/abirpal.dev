@@ -9,7 +9,7 @@ import RouteCard from "../src/components/homepage/routecard";
 import NavButton from "../src/components/mobile/navbutton";
 import Footer from "../src/components/Footer";
 import routesConfig from "../src/routes.config";
-const Home: NextPage = (storyobject: any) => {
+const Home: NextPage = () => {
   return (
     <>
       <Head>
@@ -17,16 +17,7 @@ const Home: NextPage = (storyobject: any) => {
         <link rel="icon" href="/favicon.svg" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <div
-        id="wave"
-        className=" 
-    absolute bottom-0 left-0 right-0 translate-y-1/4
-    w-full h-full
-    "
-      >
-        <Image src="/assets/wave.svg" layout="fill" />
-      </div>
-      <div className="h-screen w-screen relative">
+      <div className="h-screen w-screen relative bg-wave-pattern bg-no-repeat bg-bottom">
         <div className="z-20 text-center pt-12 ml-10 mr-10">
           <div
             className="
@@ -142,22 +133,6 @@ const Home: NextPage = (storyobject: any) => {
     </>
   );
 };
-export async function getStaticProps({ preview = false }) {
-  // home is the default slug for the homepage in Storyblok
-  let slug = "home";
-  // load the published content outside of the preview mode
-  let sbParams = {
-    version: process.env.STORYBLOK_VERSION,
-  };
 
-  let { data } = await Storyblok.get(`cdn/stories/${slug}`, sbParams);
-  return {
-    props: {
-      story: data ? data.story : null,
-      preview,
-    },
-    revalidate: 2, // revalidate every 2 seconds
-  };
-}
 
 export default Home;

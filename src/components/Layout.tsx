@@ -4,6 +4,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import { home } from "../routes.config";
+import TailwindSSRPurge from "./helpers/tailwindcssSSRpurge";
 interface LayoutProps {
   children: React.ReactNode;
   title?: string;
@@ -37,6 +38,7 @@ const Layout = ({
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <>
+      <TailwindSSRPurge/>
         <div
           id="header"
           className={` pt-8 mb-5 

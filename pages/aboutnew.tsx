@@ -1,10 +1,10 @@
-import Card from "../src/components/about/card";
 import Head from "next/head";
 import LangCard, { LangCardProps } from "../src/components/about/langCard";
 import Layout from "../src/components/Layout";
 import { getLinks, getStory, getStoryResponse } from "../src/lib/storyblok";
 import { GetServerSidePropsContext } from "next";
 const ASSETS_PATH = "/assets/about";
+import Card from "../src/components/about/card";
 import { CardProps } from "../src/components/about/card";
 import TailwindSSRPurge from "../src/components/helpers/tailwindcssSSRpurge";
 
@@ -22,51 +22,93 @@ const About = ({ jobCards, langCards }: AboutPageProps) => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Layout title="about" aboutpage={true}>
-        <div className="flex justify-center">
-          <div className=" w-4/5 ">
-            <div className="
-            iphones:grid iphones:grid-cols-1 iphones:gap-2 iphones:w-full
-            iphonex:grid iphonex:grid-cols-1 iphonex:gap-2 iphonex:w-full
-            ipad: grid ipad: grid-cols-1 ipad: gap-2 ipad:w-full
-            ipadpro:grid ipadpro:grid-cols-2 ipadpro:gap-4 ipadpro:w-full ipadpro:justify-center ipadpro:mb-5 
-            desktop:grid desktop:grid-cols-2 desktop:gap-4 desktop:w-full desktop:justify-center desktop:mb-5 
-
-            ">
-              <div className="pl-5 ">
-                <p className="
+        <div className="
+        iphones:grid iphones:grid-cols-1 iphones:gap-4 iphones:w-full iphones:ml-3
+        iphonex:grid iphonex:grid-cols-1 iphonex:gap-4 iphonex:w-full iphonex:mr-3 iphonex:ml-0
+        ipad:grid ipad:grid-cols-2 ipad:gap-4 ipad: w-full ipad: ml-48 ipad:mr-52
+        ipadpro:grid ipadpro: grid-cols-2 ipadpro:gap-4 ipadpro: w-full ipadpro: ml-54 ipadpro:mr-52
+        desktop: grid desktop
+        ">
+          <div id="jobText">
+            <p className="
                 iphones:w-full iphonex:w-full ipad:w-3/5 ipadpro:w-4/5
-                 text-left 
-                
-                 desktop:mx-auto">
-                   <p className="text-fs24">
+               
+                text-left 
+                desktop:mx-auto">
+              <p className="
+                    iphones:text-fs16 iphonex:text-fs18
+                   ipad:text-fs24 ipadpro:text-fs24 desktop:text-fs24">
 
-                  Wonderful experiences and workplaces I have been part of.
-                   </p>
-                
-                  <p className="p-3 mt-10 text-fs16
-                   iphones:w-3/5 iphonex:w-3/5 ipad:w-2/5 ipadpro:w-4/5 desktop:w-2/5
+                Wonderful experiences and workplaces I have been part of.
+              </p>
+
+              <p className="p-3 mt-10 text-fs16
+                    iphones:mt-3 iphonex:mt-5 ipad:mt-10 ipadpro:mt-10 desktop:mt-10
+                   iphones:w-3/5 iphonex:w-3/5 ipad:w-4/5 ipadpro:w-4/5 desktop:w-2/5
                   flex justify-center cursor-pointer rounded-sm text-secondary bg-primary
                   ">
-                  View Resume
-                  </p>
-                </p>
-              </div>
-              <div id="jobs" className="
-              iphones:w-full iphonex:w-full ipad:w-3/5 ipadpro:w-3/5 desktop:w-3/5
-              w-3/5  
-              pl-3 ipadpro:mt-0  iphones:mt-5 iphonex:mt-5">
-                {jobCards.map((job) => {
-                  return (
-                    <Card
-                      key={job.company?.trim()}
-                      title={job.title as string}
-                      company={job.company as string}
-                      type={job.type as "job" | "community"}
-                    />
-                  );
-                })}
-              </div>
-            </div>
+                View Resume
+              </p>
+            </p>
+          </div>
+          <div id="jobcards"
+            className="
+           iphones:w-4/5
+           ipad:w-4/5
+           ipadpro:w-4/5
+           desktop:w-3/5
+            "
+          >
+            {jobCards.map((job) => {
+              return (
+                <Card
+                  key={job.company?.trim()}
+                  title={job.title as string}
+                  company={job.company as string}
+                  type={job.type as "job" | "community"}
+                />
+              );
+            })}
+          </div>
+
+        </div>
+        <div className="w-3/4">
+          {/* <div className="
+        iphones:grid iphones:grid-cols-1 iphones:gap-4 iphones:w-full iphones:ml-3
+        iphonex:grid iphonex:grid-cols-1 iphonex:gap-4 iphonex:w-full iphonex:mr-3 iphonex:ml-0
+        ipad:grid ipad:grid-cols-2 ipad:gap-4 ipad: w-full ipad: ml-48 ipad:mr-52
+        ipadpro:grid ipadpro: grid-cols-2 ipadpro:gap-4 ipadpro: w-full ipadpro: ml-54 ipadpro:mr-52
+        desktop: grid desktop
+        "> */}
+        <div className="w-full">
+          {/* <div
+            id="lang-cards"
+            className="grid
+                      iphones:grid iphones:grid-cols-2 gap-4 iphone:w-3/5 
+                      iphonex:grid iphonex:grid-cols-2
+                      ipadpro:grid ipadpro:grid-cols-3
+        "
+          > */}
+            <div className="flex overflow-x-scroll
+             
+            ">
+
+            {langCards.map((lang) => (
+              <LangCard
+                key={lang.name?.trim()}
+                name={lang.name}
+                bg={`bg-${lang.bg as string}`}
+                fontMode={lang.fontMode}
+              />
+            ))}
+          </div>
+          </div>
+          <div>
+
+          </div>
+        </div>
+
+        {/* 
 
             <div className="grid grid-cols-2 gap-4 w-full justify-center">
               <div
@@ -101,14 +143,14 @@ const About = ({ jobCards, langCards }: AboutPageProps) => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </Layout>
     </>
   );
 };
 export default About;
 
-export async function getStaticProps(context: GetServerSidePropsContext) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { story } = await getStory(undefined, undefined, "about");
 
   const jobCards: CardProps = story.content.body
@@ -134,8 +176,8 @@ export async function getStaticProps(context: GetServerSidePropsContext) {
   return {
     props: {
       jobCards: jobCards,
+
       langCards: langCards,
     },
-    revalidate: 2000
   };
 }

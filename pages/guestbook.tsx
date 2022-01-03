@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { home } from "../src/routes.config";
 const Guestbook = () => {
+ 
   return (
     <>
       <Layout footer={false} bgPattern={true}>
@@ -22,6 +23,10 @@ const Guestbook = () => {
                 />
               </Link>
             </p>
+            <div className="p-4 bg-accent text-secondary rounded-md"
+            >
+              Sign In with Github
+            </div>
           </div>
         </div>
       </Layout>
