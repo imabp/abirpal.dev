@@ -53,6 +53,11 @@ const Snippet = ({ mdx, title, date, snippets }: SnippetPage) => {
 export default Snippet;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
+  context.res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  )
+
   const { story } = await getStory(
     context.query.uuid as string,
     "snippets",

@@ -37,6 +37,5 @@ export async function getServerSideProps() {
     props: {
       snippets: stories,
     },
-    revalidate: 21900, // check every 6 hours for new articles
   };
 }
