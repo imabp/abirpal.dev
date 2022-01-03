@@ -30,7 +30,7 @@ const SnippetHome = ({ snippets }: SnippetProps) => {
 };
 export default SnippetHome;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const stories = await getLinks("snippets");
 
   return {

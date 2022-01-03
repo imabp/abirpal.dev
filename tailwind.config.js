@@ -13,6 +13,7 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     screens: {
+      galaxyfold: "280px",
       iphones: "320px",
       iphonex: "375px",
       ipad: "744px",

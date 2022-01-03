@@ -1,5 +1,5 @@
 import Layout from "../../src/components/Layout";
-import { GetServerSidePropsContext } from "next";
+import { GetServerSidePropsContext, GetStaticPaths } from "next";
 import { serialize } from "next-mdx-remote/serialize";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
@@ -52,7 +52,7 @@ const Snippet = ({ mdx, title, date, snippets }: SnippetPage) => {
 };
 export default Snippet;
 
-export async function getStaticProps(context: GetServerSidePropsContext) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { story } = await getStory(
     context.query.uuid as string,
     "snippets",
@@ -68,6 +68,5 @@ export async function getStaticProps(context: GetServerSidePropsContext) {
       slug: story?.slug,
       snippets: snippets,
     },
-    revalidate:30000 //Every 8 hours, check whether the markdown is updated.
   };
 }

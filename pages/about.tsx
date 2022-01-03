@@ -136,6 +136,5 @@ export async function getStaticProps(context: GetServerSidePropsContext) {
       jobCards: jobCards,
       langCards: langCards,
     },
-    revalidate: 2000
   };
 }

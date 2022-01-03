@@ -107,6 +107,7 @@ const Home: NextPage = () => {
             justify-around
             w-1/2
             overflow-x-auto
+            galaxyfold:hidden
             iphones:hidden
             iphonex:hidden
             ipad:hidden
