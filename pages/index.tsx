@@ -17,7 +17,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.svg" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <div className="h-screen w-screen relative bg-wave-pattern bg-no-repeat bg-bottom">
+      <div className="h-screen w-full relative bg-wave-pattern bg-contain  bg-no-repeat bg-bottom">
         <div className="z-20 text-center pt-12 ml-10 mr-10">
           <div
             className="
@@ -122,7 +122,7 @@ const Home: NextPage = () => {
                     route={route.route}
                     key={route.route}
                   />
-                );
+                )
               })}
             </div>
           </div>
