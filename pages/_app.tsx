@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <TopProgressBar />
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </>
   );
 }

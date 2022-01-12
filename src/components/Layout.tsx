@@ -5,6 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { home } from "../routes.config";
 import TailwindSSRPurge from "./helpers/tailwindcssSSRpurge";
+import NavButton from "./mobile/navbutton";
+import { useState } from "react";
+import MenuOverlay from "./mobile/overlay";
 interface LayoutProps {
   children: React.ReactNode;
   title?: string;
@@ -22,13 +25,15 @@ const Layout = ({
   footer,
   aboutpage = false,
 }: LayoutProps) => {
+  const [overlay, setOverlay] = useState(false);
+
   if (footer === undefined) {
     footer = true;
   }
   return (
     <div
       h-full
-      className={`w-screen h-full m-0 p-0 bg-secondary 
+      className={`w-full h-full m-0 p-0 bg-secondary 
     ${bgPattern ? "bg-layout-pattern bg-repeat-x	 bg-bottom" : ""} 
     `}
     >
@@ -40,94 +45,122 @@ const Layout = ({
       <>
         <TailwindSSRPurge />
         <div
-          id="header"
-          className={` pt-8 mb-5 
+          id="mobileMenu"
+          className="
+          iphones:rounded-md
+          iphones:block iphones:fixed iphones:bottom-2 iphones:right-2
+          iphonex:rounded-md iphonex:block iphonex:fixed iphonex:bottom-2 iphonex:right-2
+          desktop:hidden
+
+          "
+        >
+          <NavButton overlay={overlay} setOverlay={setOverlay} />
+        </div>
+        {overlay && (
+          <div className="z-99 transition-all">
+            <MenuOverlay />
+          </div>
+        )}
+        {!overlay && (
+          <>
+            <div
+              id="header"
+              className={` pt-8 mb-5 
           iphones:ml-5 iphonex:ml-10
           iphones:mr-5 iphonex:mr-10
           ipad:ml-15 ipadpro:ml-15 desktop:ml-15
           ipad:mr-15 ipadpro:mr-15 desktop:mr-15
       `}
-        >
-          {aboutpage && (
-            <>
-              {" "}
-              <p
-                className="
+            >
+              {aboutpage && (
+                <div
+                  className="
+            iphones:ml-8 iphonex:ml-10
+            ipad:ml-16 ipadpro:ml-16 desktop:ml-16 desktop:mr-16
+            "
+                >
+                  <p
+                    className="
             text-center
             iphones:text-fs44  iphonex:text-fs50 
            ipadpro:text-fs50 ipad:text-fs50
-           desktop:text-fs50"
-              >
-                {title}
-              </p>
-              <p className="text-center ">
-                <Link href={home.route} passHref>
-                  <Image
-                    className="cursor-pointer"
-                    src="/system/vectors/home.svg"
-                    layout="fixed"
-                    height="24"
-                    width="24"
-                  />
-                </Link>
-              </p>
-            </>
-          )}
+           desktop:text-fs50
+           
+           "
+                  >
+                    {title}
+                  </p>
+                  <p className="text-center ">
+                    <Link href={home.route} passHref>
+                      <Image
+                        className="cursor-pointer"
+                        src="/system/vectors/home.svg"
+                        layout="fixed"
+                        height="24"
+                        width="24"
+                      />
+                    </Link>
+                  </p>
+                </div>
+              )}
 
-          {!aboutpage && (
-            <p
-              className="iphones:text-fs44  iphonex:text-fs50 
+              {!aboutpage && (
+                <p
+                  className="iphones:text-fs44  iphonex:text-fs50 
            ipadpro:text-fs50 ipad:text-fs50
            desktop:text-fs50"
-            >
-              {title ? title : <p className="invisible">invisible_title</p>}
-              {title && (
-                <span className="iphones:text-fs24 cursor-pointer ml-5">
-                  <Link href={home.route} passHref>
-                    <Image
-                      src="/system/vectors/home.svg"
-                      layout="fixed"
-                      height="24"
-                      width="24"
-                    />
-                  </Link>
-                </span>
+                >
+                  {title ? title : <p className="invisible">invisible_title</p>}
+                  {title && (
+                    <span className="iphones:text-fs24 cursor-pointer ml-5">
+                      <Link href={home.route} passHref>
+                        <Image
+                          src="/system/vectors/home.svg"
+                          layout="fixed"
+                          height="24"
+                          width="24"
+                        />
+                      </Link>
+                    </span>
+                  )}
+                </p>
               )}
-            </p>
-          )}
 
-          <p
-            className="iphones:text-fs18 iphonex:text-fs30 
+              <p
+                className="iphones:text-fs18 iphonex:text-fs30 
            ipadpro:text-fs24 ipad:text-fs24
            desktop:text-fs24"
-          >
-            {slug ? slug : <p className="invisible">invisible_slug</p>}
-          </p>
-          {slug && (
-            <Image
-              src="/system/vectors/line.svg"
-              layout="responsive"
-              width="96vw"
-              height="2px"
-            />
-          )}
-        </div>
-      </>
-      <main
-        className="
+              >
+                {slug ? slug : <p className="invisible">invisible_slug</p>}
+              </p>
+              {slug && (
+                <Image
+                  src="/system/vectors/line.svg"
+                  layout="responsive"
+                  width="96vw"
+                  height="2px"
+                />
+              )}
+            </div>
+
+            <main
+              className="
       iphones:ml-8 iphonex:ml-10
       ipad:ml-16 ipadpro:ml-16 desktop:ml-16 desktop:mr-16
       "
-      >
-        {children}
-      </main>
-      {footer ? (
+            >
+              {children}
+            </main>
+            {/* {footer ? (
         <>
           <Footer />
         </>
       ) : (
         <></>
-      )}
+      )} */}
+          </>
+        )}
+      </>
     </div>
   );
 };

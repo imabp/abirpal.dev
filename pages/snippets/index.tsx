@@ -12,17 +12,22 @@ export type SnippetProps = {
 const SnippetHome = ({ snippets }: SnippetProps) => {
   return (
     <Layout title="snippets/" bgPattern={true}>
-      <div className="grid grid-col-4">
+      <div
+        className="grid gap-4 galaxyfold:grid-cols-1 
+      iphones:grid-cols-1
+      iphonex:grid-cols-1
+      ipad:grid-cols-3
+      ipadpro:grid-cols-3
+      desktop:grid-cols-6"
+      >
         {snippets.map((snippet) => (
-          <>
-            <SnippetDisplayCard
-              key={snippet[0]}
-              title={snippet[1].name}
-              fullslug={snippet[1].slug}
-              type="potrait"
-              uuid={snippet[0]}
-            />
-          </>
+          <SnippetDisplayCard
+            key={snippet[0]}
+            title={snippet[1].name}
+            fullslug={snippet[1].slug}
+            type="potrait"
+            uuid={snippet[0]}
+          />
         ))}
       </div>
     </Layout>

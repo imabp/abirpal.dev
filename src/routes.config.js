@@ -5,7 +5,7 @@ module.exports = {
       route: "/about",
     },
     {
-      title: "Snippets",
+      title: "Blogs and Snippets",
       route: "/snippets",
     },
     {
