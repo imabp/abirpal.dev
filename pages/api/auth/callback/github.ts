@@ -28,7 +28,7 @@ const githubCallback = async (req: NextApiRequest, res: NextApiResponse) => {
     if (!code) return res.status(400).end();
 
     const user = await GitHubOAuth(code);
-    if (!user.email) return res.status(400).end();
+    if (!user.email) return res.status(400).json(user);
 
     const payload: AuthSuccessPayload = {
       data: user,
