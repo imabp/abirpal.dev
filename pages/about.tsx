@@ -24,7 +24,7 @@ const About = ({ jobCards, recommendations }: AboutPageProps) => {
         </div>
         <div className="text-fs24 iphones:text-left ipad:text-center mt-16 mb-4">
           The audio clip that makes your day!
-          <div className="flex w-full flex mt-10 ipad:justify-center">
+          <div className="flex w-full mt-5 ipad:justify-center">
             <AudioCard />
           </div>
         </div>

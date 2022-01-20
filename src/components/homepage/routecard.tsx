@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import { motion } from "framer-motion";
 export type RouteCardProps = {
   title: string;
   route: string;
@@ -10,8 +10,14 @@ const DefaultRouteCardProps: RouteCardProps = {
 };
 const RouteCard = (props: RouteCardProps) => {
   return (
-    <>
-      <Link href={props.route}>
+    <Link href={props.route}>
+      <motion.div
+        whileHover={{
+          scale: 0.9,
+          transition: { duration: 0.2 },
+        }}
+        className="cursor-pointer"
+      >
         <a>
           <div
             className="
@@ -24,9 +30,9 @@ const RouteCard = (props: RouteCardProps) => {
           >
             {props.title}
           </div>
-        </a>
-      </Link>
-    </>
+        </a>{" "}
+      </motion.div>
+    </Link>
   );
 };
 export default RouteCard;

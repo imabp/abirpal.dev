@@ -17,6 +17,7 @@ interface LayoutProps {
   bgPattern?: boolean;
   footer?: boolean | undefined;
   aboutpage?: boolean;
+  guestbook?: boolean;
 }
 
 const Layout = ({
@@ -26,6 +27,7 @@ const Layout = ({
   bgPattern,
   footer,
   aboutpage = false,
+  guestbook = false,
 }: LayoutProps) => {
   const [overlay, setOverlay] = useState(false);
 
@@ -35,7 +37,13 @@ const Layout = ({
   return (
     <div
       className={`w-full min-h-screen h-full m-0 p-0 bg-secondary 
-    ${bgPattern ? "bg-layout-pattern bg-repeat-x	 bg-bottom" : ""} 
+    ${
+      bgPattern
+        ? guestbook
+          ? "bg-layout-pattern bg-repeat-x bg-top"
+          : "bg-layout-pattern bg-repeat-x	 bg-bottom"
+        : ""
+    } 
     `}
     >
       <Head>

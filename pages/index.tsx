@@ -2,18 +2,14 @@ import { useState } from "react";
 import type { NextPage } from "next";
 import MenuOverlay from "../src/components/mobile/overlay";
 import Head from "next/head";
-import Image from "next/image";
-import Layout from "../src/components/Layout";
-import Storyblok from "./../src/lib/storyblok";
 import largeCircle from "./../public/assets/home/imabpImage.svg";
-import DynamicComponent from "../src/components/DynamicComponent";
 import NavButton from "../src/components/mobile/navbutton";
 import Footer from "../src/components/Footer";
-import routesConfig, { routes } from "../src/routes.config";
 import TwitterHeader from "../src/containers/homepage/twitterheader";
 import NameAndTitle from "../src/containers/homepage/namesection";
 import AvatarSection from "../src/containers/homepage/avatarsection";
 import RouteCards from "../src/containers/homepage/routecards";
+import { motion } from "framer-motion";
 const Home: NextPage = () => {
   const [overlay, setOverlay] = useState(false);
 
@@ -39,8 +35,13 @@ const Home: NextPage = () => {
           <NavButton overlay={overlay} setOverlay={setOverlay} />
         </div>
         {overlay && (
-          <div className="z-99 transition-all">
-            <MenuOverlay />
+          <div className="z-99 transition-all overflow-hidden">
+            <motion.div
+              animate={{ x: [700, 0] }}
+              transition={{ duration: 0.5 }}
+            >
+              <MenuOverlay />
+            </motion.div>
           </div>
         )}
         {!overlay && (

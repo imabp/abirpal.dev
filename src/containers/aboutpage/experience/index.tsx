@@ -7,11 +7,16 @@ import Card from "../../../components/about/card";
 import { CardProps } from "../../../components/about/card";
 import TailwindSSRPurge from "../../../components/helpers/tailwindcssSSRpurge";
 import Link from "next/link";
+import { useState } from "react";
 interface ExperiencePageProps {
   jobCards: CardProps[];
 }
 
 const Experience = ({ jobCards }: ExperiencePageProps) => {
+  const [funfact, setFunfact] = useState(false);
+  const toggleFunFact = () => {
+    setFunfact(!funfact);
+  };
   return (
     <>
       <div
@@ -30,10 +35,33 @@ const Experience = ({ jobCards }: ExperiencePageProps) => {
           desktop:w-1/4
           "
         >
-          <div>Wonderful experiences and workplaces I have been part of</div>
+          <div className="text-fs18 ipad:text-justify ipad:w-4/5">
+            I love to unwind and demystify software abstractions.
+            <div
+              className="cursor-pointer underline text-orangecustom"
+              onMouseOver={toggleFunFact}
+              onMouseLeave={toggleFunFact}
+            >
+              Hover to see fun fact
+            </div>
+            <div className={funfact ? "block" : "invisible"}>
+              <i>
+                I copied an one-time-visible secret and then copied the link to
+                enter it...
+                <br />
+                And there my secret is lost...
+              </i>
+            </div>{" "}
+          </div>
           <Link passHref href="/">
             <p className=" text-center cursor-pointer p-4 w-2/3 mt-10 text-fs18 bg-primary text-white">
-              View Resume
+              <a
+                href="https://imabp.github.io/resume"
+                target={"_blank"}
+                rel="noopener noreferrer"
+              >
+                View Resume
+              </a>
             </p>
           </Link>
         </div>
