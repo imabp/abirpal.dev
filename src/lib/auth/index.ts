@@ -34,9 +34,16 @@ export const GitHubOAuth = async (code: string) => {
         Authorization: `token ${access_token}`,
       },
     });
-    if (ghresponse.data.toString().includes("error"))
+    const ghresponsePRIVATEemail = await axios.get("https://api.github.com/user/emails", {
+      headers: {
+        Authorization: `token ${access_token}`,
+      },
+    });
+    const email = ghresponsePRIVATEemail.data[0].email;
+    if (ghresponse.data.toString().includes("error") || ghresponsePRIVATEemail.data.toString().includes("error"))
       throw new Error(GithubOAuthErrors.ACCESS_TOKEN_EXPIRED);
-
+    if(!ghresponse.data.email)
+      ghresponse.data.email = email;
     const user = githubProvider(ghresponse.data);
 
     return user;
