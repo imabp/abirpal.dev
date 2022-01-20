@@ -33,7 +33,7 @@ module.exports = {
       purplecustom: "#A74CEF",
       redcustom: "#EF4C87",
       orangecustom: "#EF7D4C",
-      greencustom: "#A3F960",
+      greencustom: "#00742E",
       "lang-bg-typescript": "#007ACC",
       "lang-bg-golang": "#00ACD7",
       "lang-bg-java": "#FB4B4C",

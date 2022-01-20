@@ -8,6 +8,8 @@ import TailwindSSRPurge from "./helpers/tailwindcssSSRpurge";
 import NavButton from "./mobile/navbutton";
 import { useState } from "react";
 import MenuOverlay from "./mobile/overlay";
+import { motion } from "framer-motion";
+import SideNav from "../containers/sidenav";
 interface LayoutProps {
   children: React.ReactNode;
   title?: string;
@@ -32,8 +34,7 @@ const Layout = ({
   }
   return (
     <div
-      h-full
-      className={`w-full h-full m-0 p-0 bg-secondary 
+      className={`w-full min-h-screen h-full m-0 p-0 bg-secondary 
     ${bgPattern ? "bg-layout-pattern bg-repeat-x	 bg-bottom" : ""} 
     `}
     >
@@ -44,6 +45,7 @@ const Layout = ({
       </Head>
       <>
         <TailwindSSRPurge />
+        <SideNav />
         <div
           id="mobileMenu"
           className="
@@ -51,14 +53,20 @@ const Layout = ({
           iphones:block iphones:fixed iphones:bottom-2 iphones:right-2
           iphonex:rounded-md iphonex:block iphonex:fixed iphonex:bottom-2 iphonex:right-2
           desktop:hidden
-
+          
           "
         >
           <NavButton overlay={overlay} setOverlay={setOverlay} />
         </div>
+
         {overlay && (
-          <div className="z-99 transition-all">
-            <MenuOverlay />
+          <div className="z-99 transition-all overflow-hidden">
+            <motion.div
+              animate={{ x: [700, 0] }}
+              transition={{ duration: 0.5 }}
+            >
+              <MenuOverlay />
+            </motion.div>
           </div>
         )}
         {!overlay && (
