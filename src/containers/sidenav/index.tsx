@@ -6,7 +6,7 @@ const SideNav = () => {
   return (
     <div className="hidden mr-10 mt-10 desktop:block h-1/2 fixed top-0 right-0 ">
       <Link href="/" passHref>
-        <a>
+        <a title={"Home"}>
           <motion.div
             whileHover={{
               scale: 1.2,
@@ -24,7 +24,7 @@ const SideNav = () => {
       </Link>
       {routes.map((route) => (
         <Link passHref href={route.route}>
-          <a>
+          <a title={route.title}>
             <motion.div
               whileHover={{
                 scale: 1.2,
