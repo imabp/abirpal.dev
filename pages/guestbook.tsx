@@ -10,7 +10,8 @@ import { useRouter } from "next/router";
 import { AuthSuccessPayload } from "./api/auth/callback/github";
 import { getStory } from "../src/lib/storyblok";
 import { StoryData } from "storyblok-js-client";
-import CommentBox, { commentTYPE } from "../src/components/guestbook/comments";
+import CommentBox, { commentTYPE, EMPTYCOMMENT } from "../src/components/guestbook/comments";
+import { GetAllComments } from "../src/guestbook.db";
 
 interface GuestBookProps {
   user: GitHubUser;
@@ -28,6 +29,15 @@ const EMPTY_GITHUB_USER: GitHubUser = {
 const Guestbook = ({ user, auth, comments }: GuestBookProps) => {
   const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false)
+  const [showComments, setShowComments] = useState(false);
+  useEffect(()=>{
+    if(comments[0].message!==EMPTYCOMMENT.message)
+    {
+      console.log(comments[0].message, EMPTYCOMMENT.message)
+      setShowComments(true);
+    }
+  },[])
   const call = () => {
     if (auth) return;
 
@@ -35,26 +45,26 @@ const Guestbook = ({ user, auth, comments }: GuestBookProps) => {
     const GITHUB_CLIENT_ID = process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID;
     const SCOPES = "read:user user:email";
     const GITHUB_STATE_PARAM = process.env.NEXT_PUBLIC_GITHUB_STATE;
-    const URI = `${GITHUB_URL}?client_id=${GITHUB_CLIENT_ID + "&"}scope${
-      "=" + SCOPES
-    }&state${"=" + GITHUB_STATE_PARAM}`;
+    const URI = `${GITHUB_URL}?client_id=${GITHUB_CLIENT_ID + "&"}scope${"=" + SCOPES
+      }&state${"=" + GITHUB_STATE_PARAM}`;
     window.location.replace(URI);
   };
   const postComment = () => {
+    setErrorMessage(false)
     setSubmitting(true);
-    comments.unshift({
+    const comment = {
       message: message,
       name: user.name,
       username: user.username,
       date: GetFormatDateString(),
-    });
+    };
 
     return window
       .fetch("/api/guestbook/post_comment", {
         method: "POST",
         body: JSON.stringify({
           payload: {
-            comments: comments,
+            comments: comment,
           },
         }),
         headers: {
@@ -62,11 +72,18 @@ const Guestbook = ({ user, auth, comments }: GuestBookProps) => {
         },
       })
       .then((res) => {
+        if (res.status.toString().includes('4')) {
+          throw new Error("Client Error")
+        }
         setMessage("");
         setSubmitting(false);
-        return res.text();
+        window.location.reload();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setSubmitting(false);
+
+        setErrorMessage(true)
+      });
   };
 
   return (
@@ -127,7 +144,8 @@ const Guestbook = ({ user, auth, comments }: GuestBookProps) => {
                   placeholder="Your message..."
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="w-4/5 ml-6 mb-4 rounded-md border-4 p-2 border-black"
+                  className={`w-4/5 ml-6 mb-4 rounded-md border-4 p-2
+                  ${errorMessage ? "bg-redcustom text-white" : ""}`}
                 />
                 <div
                   className="bg-accent w-28 ml-6 p-2 text-white rounded-md cursor-pointer hover:bg-accenthover text-center"
@@ -138,13 +156,13 @@ const Guestbook = ({ user, auth, comments }: GuestBookProps) => {
               </div>
             )}
             <div className=" mt-14 ml-4  ">
-              {comments.map((comment, i) => (
+              {showComments &&  comments.map((comment, i) => (
                 <CommentBox
-                key={i}
-                name={comment.name}
-                message={comment.message}
-                date={comment.date}
-                username = {comment.username}
+                  key={i}
+                  name={comment.name}
+                  message={comment.message}
+                  date={comment.date}
+                  username={comment.username}
                 />
               ))}
             </div>
@@ -159,19 +177,23 @@ export default Guestbook;
 export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
-  const { story } = await getStory(undefined, undefined, "guestbook");
-  const { body } = story.content;
-  const comments: commentTYPE[] =
-    body &&
-    body.map((comment: commentTYPE) => {
-      return {
-        name: comment.name,
-        username: comment.username,
-        message: comment.message,
-        date: comment.date,
-      };
-    });
-
+  const body: any = await GetAllComments()
+  let comments: commentTYPE[] = [
+   EMPTYCOMMENT
+  ];
+  if (body && body.comments) {
+    comments =
+      body &&
+      body.comments.map((comment: commentTYPE) => {
+        return {
+          name: comment.name,
+          username: comment.username,
+          message: comment.message,
+          date: comment.date,
+        };
+      });
+    console.log(body.comments);
+  }
   // Handling Authentication
   try {
     const { auth } = context.req.cookies;
