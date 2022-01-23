@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import { serialize } from "cookie";
 import { NextApiResponse } from "next";
 import { CookieSerializeOptions } from "next/dist/server/web/types";
-
+import { commentTYPE } from "../components/guestbook/comments";
 export type CookieConfig = {
   name: string;
   value: string;
@@ -65,3 +65,25 @@ export const GetFormatDateString = () => {
   const today = new Date();
   return today.toLocaleDateString("en-US", options);
 };
+
+export const SanitizeGuestBookComment = (payload: any) => {
+  try {
+    if(
+      (payload.name as string).trim().length ===0 ||
+      (payload.message as string).trim().length ===0 ||
+      (payload.username as string).trim().length ===0 ||
+      (payload.date as string).trim().length ===0
+    )
+    throw new Error("Empty Inputs")
+    const s: commentTYPE = {
+      name: payload.comment as string,
+      message: payload.message as string,
+      username: payload.username as string,
+      date: payload.date as string
+    }
+    return { validated: true, comment: s };
+  } catch (e: any) {
+    console.log(e.message)
+    return { validated: false };
+  }
+}
