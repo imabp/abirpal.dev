@@ -1,7 +1,8 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import "nprogress/nprogress.css";
+import "../styles/loading.css";
 import dynamic from "next/dynamic";
+import TailwindSSRPurge from "../src/components/helpers/tailwindcssSSRpurge";
 
 const TopProgressBar = dynamic(
   () => {
@@ -13,6 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <TopProgressBar />
+      <TailwindSSRPurge/>
       <Component {...pageProps} />
     </>
   );
