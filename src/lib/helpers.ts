@@ -87,3 +87,7 @@ export const SanitizeGuestBookComment = (payload: any) => {
     return { validated: false };
   }
 }
+export const getRandomColor=()=>{
+  const color = "hsl(" + Math.random() * 360 + ", 100%, 75%)";
+  return color;
+}

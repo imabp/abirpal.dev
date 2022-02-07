@@ -1,10 +1,11 @@
 import QuadrantCircleVector from "../../../../public/system/vectors/quadrantPrimary.svg";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 export type SnippetCardProps = {
   title: string;
   fullslug: string;
-  type?: "landscape" | "potrait";
+  type?: "landscape" | "potrait" | string;
   uuid?: string;
 };
 
@@ -64,6 +65,21 @@ const SnippetDisplayCard = ({
   uuid,
 }: SnippetCardProps) => {
   switch (type) {
+    case "v2":
+      return (
+        <Link href={`/${fullslug}?uuid=${uuid}`} passHref>
+          <motion.div 
+                  whileHover={{
+                    scale: 1.04,
+                    transition: { duration: 0.2 },
+                  }} key={uuid} className="hover:border-primary cursor-pointer bg-browncustom border-2 border-white text-white w-full p-4 ipadpro:w-4/5  rounded-md">
+            <div className="text-fs24">
+              {title}
+            </div>
+          </motion.div>
+        </Link>
+      )
+
     case "landscape":
       return (
         <>

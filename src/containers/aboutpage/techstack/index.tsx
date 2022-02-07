@@ -1,11 +1,11 @@
 import Image from "next/image";
 const TechStack = () => {
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center ">
       <p className="w-full ipad:text-center iphones:text-left text-fs24 ipad:text-fs24 mt-10 ipad:w-full mb-10">
         Tech Stacks I have worked at Production.
       </p>
-      <div className="ipad:mx-auto relative flex w-3/5 overflow-x-hidden ">
+      <div className="bg-white rounded-md p-4 border-8 border-primary ipad:mx-auto relative flex w-3/5 overflow-x-hidden ">
         <div className=" animate-marquee whitespace-nowrap">
           <span className="text-4xl mx-4">
             <Image

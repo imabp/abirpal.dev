@@ -155,7 +155,7 @@ const Layout = ({
 
               
               <main
-                className="h-screen
+                className="h-full min-h-screen
                           iphones:ml-8 iphonex:ml-10
                           ipad:ml-16 ipadpro:ml-16 desktop:ml-16 desktop:mr-16
                           "

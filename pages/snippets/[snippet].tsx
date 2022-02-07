@@ -1,4 +1,4 @@
-import Layout from "../../src/components/Layout";
+import Layout from "../../src/components/Layout/index";
 import { GetServerSidePropsContext, GetStaticPaths } from "next";
 import { serialize } from "next-mdx-remote/serialize";
 import ReactMarkdown from "react-markdown";
@@ -19,33 +19,21 @@ interface SnippetPage {
 const Snippet = ({ mdx, title, date, snippets }: SnippetPage) => {
   return (
     <>
-      <Layout title="snippets/" slug={title as string}>
+      <Layout >
         <div
-          className="prose 
-         block mr-auto ml-auto iphones:mr-5 ipad:mr-auto ipadpro:mr-auto desktop:mr-auto
+          className="prose text-white
+         block ml-10
          "
         >
+          <p className="text-fs24 font-bold">{title}</p>
           <MarkdownViewer
             mdx={mdx}
-            className="
+            className="text-white
          block mr-auto ml-auto iphones:mr-5 ipad:mr-auto ipadpro:mr-auto desktop:mr-auto 
          "
           />
         </div>
-        <p className="text-2xl mb-4">More Articles</p>
-        <div className="relative flex ml-3 overflow-x-scroll">
-          {snippets.map((snippet) => (
-            <>
-              <SnippetDisplayCard
-                key={snippet[0]}
-                title={snippet[1].name}
-                fullslug={snippet[1].slug}
-                type="landscape"
-                uuid={snippet[0]}
-              />
-            </>
-          ))}
-        </div>
+      
       </Layout>
     </>
   );

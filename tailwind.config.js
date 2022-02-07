@@ -17,13 +17,14 @@ module.exports = {
       iphones: "320px",
       iphonex: "375px",
       ipad: "744px",
-      ipadpro: "1000px",
-      desktop: "1024px",
+      ipadpro: "1400px",
+      desktop: "1401px",
     },
     colors: {
       transparent: "transparent",
       current: "currentColor",
       primary: "#E86383",
+      base: "#423F3F",
       secondary: "#F8F8F8",
       accent: "#2C2C2C",
       white: "#FFFFFF",
@@ -34,6 +35,9 @@ module.exports = {
       redcustom: "#EF4C87",
       orangecustom: "#EF7D4C",
       greencustom: "#00742E",
+      blackcustom:"#151515",
+      whitecustom:"#E4E4E4",
+      browncustom:"#181111",
       "lang-bg-typescript": "#007ACC",
       "lang-bg-golang": "#00ACD7",
       "lang-bg-java": "#FB4B4C",
@@ -59,6 +63,10 @@ module.exports = {
       fs64: "64px",
     },
     extend: {
+      colors: {
+        "GRADIENT_BlackTop": "#323232",
+        "GRADIENT_BlackDown": "#151515",
+      },
       fontFamily: {
         sans: ["IBM Plex Sans", ...fontFamily.sans],
       },

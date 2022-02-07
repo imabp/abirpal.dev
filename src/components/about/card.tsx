@@ -85,7 +85,7 @@ const CommunityOrJobCard = ({
           <div className="text-primary">{company ? company : "Company"}</div>
         </div>
         <div className="w-full mt-2">
-          {title ? <div className="text-fs16">{title}</div> : "Position"}
+          {title ? <div className="text-fs16 text-base">{title}</div> : "Position"}
         </div>
       </div>
     </>

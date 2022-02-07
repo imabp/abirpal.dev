@@ -17,7 +17,7 @@ const RecommendationCard = ({
       {console.log(image)}
       <div
         id={`lang-card-${name}`}
-        className="bg-white hover:bg-secondary cursor-pointer rounded-md p-5 w-full iphones:mr-3 ipadpro:m-10"
+        className="bg-base text-white  cursor-pointer rounded-md p-5 w-full iphones:mr-3 ipadpro:m-10"
       >
         <div className="flex flex-row">
           <div className="mr-5">

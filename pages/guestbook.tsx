@@ -1,4 +1,4 @@
-import Layout from "../src/components/Layout";
+import Layout from "../src/components/Layout/index";
 import Image from "next/image";
 import Link from "next/link";
 import { home } from "../src/routes.config";
@@ -88,24 +88,24 @@ const Guestbook = ({ user, auth, comments }: GuestBookProps) => {
 
   return (
     <>
-      <Layout footer={false} bgPattern={true} guestbook={true}>
-        <p className="-mt-14 font-bold text-fs24 ipadpro:text-center ">
+      <Layout >
+        <p className="mt-14 font-bold text-fs24 ipadpro:text-center ">
           GuestBook
         </p>
         <p className="font-bold text-fs16 ipadpro:text-center mb-6">
           Welcome to Guestbook!
         </p>
 
-        <div className="ipadpro:mt-10 ipadpro:flex ipadpro:justify-center w-full">
+        <div className="mx-auto ipadpro:mt-10 ipadpro:flex ipadpro:justify-center w-full">
           <div className="flex flex-col  ipadpro:w-1/3">
-            <div className="sticky top-0 bg-secondary pb-5 grid grid-cols-1 ipadpro:grid-cols-2 gap-4">
+            <div className="sticky top-0 bg-base border-2  border-white rounded-md p-4 pb-5 grid grid-cols-1 ipadpro:grid-cols-2 gap-4">
               <div className="ipadpro:pl-5 w-full">
                 Leave a comment below. It could be anything – appreciation,
                 information, wisdom, or even humor. Surprise me!
                 <div
                   className={`mt-5 cursor-pointer 
                 
-                ${user.username ? "bg-greencustom " : "bg-accent"}
+                ${user.username ? "bg-greencustom " : "bg-primary text-base"}
                 text-secondary
                 w-60 p-2 pl-4 rounded-md`}
                   onClick={call}
@@ -145,7 +145,7 @@ const Guestbook = ({ user, auth, comments }: GuestBookProps) => {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   className={`w-4/5 ml-6 mb-4 rounded-md border-4 p-2
-                  ${errorMessage ? "bg-redcustom text-white" : ""}`}
+                  ${errorMessage ? "bg-redcustom " : "text-base"}`}
                 />
                 <div
                   className="bg-accent w-28 ml-6 p-2 text-white rounded-md cursor-pointer hover:bg-accenthover text-center"
