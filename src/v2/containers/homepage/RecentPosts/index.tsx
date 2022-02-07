@@ -1,7 +1,8 @@
-import Image from "next/image";
+import Link from "next/link";
 import { StoryData } from "storyblok-js-client";
 import SnippetDisplayCard from "../../../../containers/snippets/cards";
 import { getLinks } from "../../../../lib/storyblok";
+import routesConfig from "../../../../routes.config";
 export type RecentPostsType = {
     snippets: [string, StoryData][];
 };
@@ -26,9 +27,12 @@ const RecentPosts = (props: any) => {
 
 
             </div>
-            <div className="text-whitecustom text-fs14  mt-8">
-               <span className="hover:text-primary cursor-pointer ">View More</span> 
-            </div>
+            <Link href={routesConfig.blog.route} passHref>
+                <div className="text-whitecustom text-fs14  mt-8">
+                    <span className="hover:text-primary cursor-pointer ">
+                        <a>View More</a></span>
+                </div>
+            </Link>
 
         </div></>
 }
