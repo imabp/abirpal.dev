@@ -12,7 +12,7 @@ const RecentPosts = (props: any) => {
             <div><b>Recent Posts</b></div>
 
         </div>
-        <div className="w-full desktop:w-3/5 ipadpro:w-4/5 text-fs18 mt-6 text-whitecustom">
+        <div className="w-full desktop:w-3/5 ipadpro:w-4/5 text-fs21 mt-6 text-whitecustom">
             <div className="grid gap-4 grid-cols-1 ipad:grid-cols-3 ipadpro:grid-cols-3 ">
                 {
                     props.snippets.map((snippet: [string, StoryData]) =>

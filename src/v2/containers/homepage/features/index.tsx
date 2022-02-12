@@ -10,7 +10,7 @@ type FEATURE = {
     _name: string,
     _image: any,
     _text: string,
-    _link:string,
+    _link: string,
 }
 const FEATURES: FEATURE[] = [
     {
@@ -22,23 +22,23 @@ const FEATURES: FEATURE[] = [
     {
         _name: "testimonials",
         _image: TestimonialsSVG,
-        _text: "Testimonials",
+        _text: "View Recommendations",
         _link: routesConfig.about.route
 
     },
     {
-        _name: "developer community",
-        _image: TalksSVG,
-        _text: "Developer Community",
-        _link: routesConfig.community.route
-    
-    },
-    {
         _name: "blogs",
         _image: SnippetsSVG,
-        _text: "Blogs and Snippets",
+        _text: "View Blogs and Snippets",
         _link: routesConfig.blog.route
-    }
+    },
+    {
+        _name: "developer community",
+        _image: TalksSVG,
+        _text: "Join the #DAL ",
+        _link: routesConfig.community.route
+
+    },
 ]
 
 const Features = () => {
@@ -47,25 +47,31 @@ const Features = () => {
             <div><b>Things you should try out. </b></div>
 
         </div>
-        <div className="mb-5 w-4/5 ipadpro:w-3/5 text-fs18 mt-6 text-whitecustom">
-            <div className="grid iphones:grid-cols-1 ipadpro:grid-cols-3 gap-8">
+        <div className="mb-5 w-full ipadpro:w-3/5 text-fs14 ipad:text-fs21 mt-6 text-whitecustom">
+            <div className="grid grid-cols-1 gap-8">
                 {FEATURES.map((feat: FEATURE) => {
-                    return <motion.div 
-                    whileHover={{
-                      scale: 1.04,
-                      transition: { duration: 0.2 },
-                    }} className="w-full  cursor-pointer 
-                   flex flex-row justify-around">
-                       <Link href={feat._link} passHref>
-                        <div 
-                        className={` bg-blackcustom rounded-sm cursor-pointer border-2 p-4 border-white hover:border-primary`}
-                        >
-                            <Image src={feat._image} layout="fixed" height={40} width={40}/>
-                        </div>
-                       </Link>
-                        <div className="text-center flex flex-col justify-center">
-                            {feat._text}
-                        </div>
+                    return <motion.div
+                        whileHover={{
+                            scale: 1.04,
+                            transition: { duration: 0.2 },
+                        }} 
+                        className="cursor-pointer grid grid-cols-1 w-full">
+
+                        <Link href={feat._link} passHref>
+                            <a>
+                                <motion.div
+                                    className={`
+                                    rounded-sm cursor-pointer p-1 `}
+                                >
+                                    <span className="align-middle m-4">
+                                    <Image src={feat._image} layout="fixed" height={40} width={40} />
+                                    </span>
+                                    <div className="inline align-middle ml-4 hover:text-primary">
+                                    {feat._text}
+                                    </div>
+                                </motion.div></a>
+                        </Link>
+
                     </motion.div>
                 })
                 }

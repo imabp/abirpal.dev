@@ -22,7 +22,7 @@ const Snippet = ({ mdx, title, date, snippets }: SnippetPage) => {
       <Layout >
         <div
           className="prose text-white
-         block ml-10
+         block ml-10 
          "
         >
           <p className="text-fs24 font-bold">{title}</p>
@@ -45,7 +45,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     "Cache-Control",
     "public, s-maxage=10, stale-while-revalidate=59"
   );
-
+  console.log(context.query.uuid);
   const { story } = await getStory(
     context.query.uuid as string,
     "snippets",

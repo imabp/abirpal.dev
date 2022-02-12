@@ -1,14 +1,14 @@
 import Layout from "../../src/components/Layout/index";
-import Storyblok, { getLinks } from "../../src/lib/storyblok";
-import NetSPattern from "../../public/system/vectors/layoutPattern.svg"
+import { getLinks } from "../../src/lib/storyblok";
 import { StoryblokComponent, StoryData } from "storyblok-js-client";
-import { useRouter } from "next/router";
 import Image from "next/image"
 import { ReactNode, useState } from "react";
-import { getRandomColor } from "../../src/lib/helpers";
 import { motion } from "framer-motion";
 import SnippetDisplayCard from "../../src/containers/snippets/cards";
 import Link from "next/link";
+import { Audio } from  'react-loader-spinner'
+
+import MarkdownViewer from "../../src/containers/markdownViewer";
 export type SnippetProps = {
   //[uuid : storydata]
   snippets: [string, StoryData][];
@@ -23,7 +23,26 @@ const initialHeroCardData: HeroCardData = {
   description: <b>You liked it!<br /> Let’s connect on twitter: @imabptweets</b>
 }
 const SnippetHome = ({ snippets }: SnippetProps) => {
+  const [loading,setLoading] = useState(false);
+  const [mdx, setMDX] = useState(`### Reading helps you to explore your curiosity!
+  ![wallpaper](https://github.com/imabp/wallpapers/raw/main/collection/CachedImage_1920_1080_POS2.jpg)
+  
+  ****
+  
+  Choose a topic on left, to get started.
+  `)
+  const getMDX = async (uuid: string) => {
+    setLoading(true)
+    console.log(uuid);
+    const response = await window.fetch('/api/getMDX', {
+      method: "POST",
+      body: JSON.stringify({ "uuid": uuid })
+    })
+    const data = await response.json();
+    setLoading(false)
+    setMDX(data.mdx)
 
+  }
   const [heroCardData, setHeroCardData] = useState<HeroCardData>(initialHeroCardData)
   const onHoverHandler = (snippet: [string, StoryData<StoryblokComponent<string> & {
     [index: string]: any;
@@ -31,50 +50,51 @@ const SnippetHome = ({ snippets }: SnippetProps) => {
     setHeroCardData(
       {
         title: snippet[1].name,
-        description:"Demo Title",
-        readmore:snippet[0]
+        description: "Demo Title",
+        readmore: snippet[0]
       }
     )
   }
   return (
     <Layout>
-  
+      <div className="w-full flex flex-row
+  text-fs18 mt-12 ipadpro:ml-12 px-12 text-whitecustom ">
+        <div className="relative">
 
-  <div className="w-full desktop:w-3/5 ipadpro:w-4/5 text-fs18 mt-12 ml-12 text-whitecustom ">
-            <div className="grid gap-4 grid-cols-1 ipad:grid-cols-3 ipadpro:grid-cols-3 min-h-48 ">
-                {
-                    snippets.map((snippet: [string, StoryData]) =>
-                        <SnippetDisplayCard
-                            key={snippet[0]}
-                            title={snippet[1].name}
-                            fullslug={snippet[1].slug}
-                            type="v2"
-                            uuid={snippet[0]}
-                        />)
-                }
-
-
-            </div>
-           
+          <div className="sticky top-12 grid iphones:grid-cols-1 grid-cols-3 gap-4 ">
+            {
+              snippets.map((snippet: [string, StoryData]) => {
+                const title = snippet[1].name
+                const fullslug = snippet[1].slug
+                const type = "v2"
+                const uuid = snippet[0]
+                return <>
+                  <motion.div
+                    onClick={() => getMDX(uuid)}
+                    key={uuid}
+                    whileHover={{
+                      scale: 1.04,
+                      transition: { duration: 0.2 },
+                    }} className="hover:border-primary cursor-pointer bg-browncustom border-2 border-white text-white w-full p-4 ipadpro:w-4/5  rounded-md">
+                    <div className="text-fs24">
+                      {title}
+                    </div>
+                  </motion.div>
+                </>
+              }
+              )
+            }
+          </div>
         </div>
-      {/* <div
-        className="grid galaxyfold:grid-cols-1 
-      iphones:grid-cols-1
-      iphonex:grid-cols-1
-      ipad:grid-cols-3
-      ipadpro:grid-cols-3
-      desktop:grid-cols-6"
-      >
-        {snippets.map((snippet) => (
-          <SnippetDisplayCard
-            key={snippet[0]}
-            title={snippet[1].name}
-            fullslug={snippet[1].slug}
-            type="v2"
-            uuid={snippet[0]}
-          />
-        ))}
-      </div> */}
+        <div>
+
+        {loading && <div className="h-full w-full"> <Audio color="#E86383" /></div>}
+          <div className="hidden desktop:block ">
+            {!loading && <MarkdownViewer mdx={mdx} />}
+            
+          </div>
+        </div>
+      </div>
     </Layout>
   );
 };

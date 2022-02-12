@@ -53,7 +53,7 @@ export const JWTDecode = (token: string) => {
     throw new Error("Invalid Token");
   }
 };
-export const GetFormatDateString = () => {
+export const GetFormatDateString = (isoString?:string) => {
   const options: any = {
     year: "numeric",
     month: "long",
@@ -62,7 +62,11 @@ export const GetFormatDateString = () => {
     minute: "numeric",
     second: "numeric",
   };
-  const today = new Date();
+  let today = new Date();
+  
+  if(isoString)
+  today = new Date(isoString)
+  
   return today.toLocaleDateString("en-US", options);
 };
 

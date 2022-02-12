@@ -56,6 +56,7 @@ module.exports = {
     fontSize: {
       fs14: "14px",
       fs18: "18px",
+      fs21: "21px",
       fs24: "24px",
       fs35: "35px",
       fs44: "44px",

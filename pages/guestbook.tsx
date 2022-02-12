@@ -89,7 +89,7 @@ const Guestbook = ({ user, auth, comments }: GuestBookProps) => {
   return (
     <>
       <Layout >
-        <p className="mt-14 font-bold text-fs24 ipadpro:text-center ">
+        <p className="mt-14 ml-4 font-bold text-fs24 ipadpro:text-center ">
           GuestBook
         </p>
         <p className="font-bold text-fs16 ipadpro:text-center mb-6">
