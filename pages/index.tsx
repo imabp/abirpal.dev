@@ -30,7 +30,7 @@ const Home = ({ snippets }: RecentPostsType) => {
 
 export default Home;
 export async function getServerSideProps() {
-  let stories = await getLinks("snippets");
+  const stories = await getLinks("snippets");
   const Top3stories = stories && [stories[0], stories[1], stories[2]]
   return {
     props: {

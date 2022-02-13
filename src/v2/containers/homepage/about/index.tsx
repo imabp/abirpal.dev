@@ -15,7 +15,12 @@ const About = () => {
             I am a <b>Major League Hacking Fellow</b> and I contribute to <b>Open Source EDA Specification</b> at AsyncAPI.
             <br/>
             <br/>
-            I am passionate about building <b>Developer  Relations and Experience</b> and have been hosting/ invited at various conferences and developer communities. 
+            I am also passionate about building <b>Developer  Relations and Experience</b> and a public speaker at various conferences like 
+            <br/>Postman Inc. API Conference,  Pvt. Guest Speaker DSAILT Conference by Georgia Tech and Carnegie Mellon University, Google Brain and FB Research and various other developer communities.
+            <br/><br/>
+            <b>Fun fact:</b><br/>
+            I believe we can make anywhere doors, see <a className="text-primary font-bold" target="_blank" rel="noreferrer noopenner" href="https://twitter.com/imabptweets/status/1492861973414887429">
+            how</a>...
         </div></>
 }
 export default About;
